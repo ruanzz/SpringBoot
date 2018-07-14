@@ -1,0 +1,29 @@
+spring:
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+  datasource:
+    db:
+      driver-class-name:  com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/springboot?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&autoReconnect=true&failOverReadOnly=false
+      username: root
+      password: root
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+
+server:
+  tomcat:
+    uri-encoding: UTF-8
+  port: 8080
+
+logging:
+  level:
+      com.ryan.springboot.dao:  DEBUG
+
