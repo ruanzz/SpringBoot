@@ -5,18 +5,31 @@ spring:
       charset: UTF-8
       enabled: true
   datasource:
-    db:
-      driver-class-name:  com.mysql.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/springboot?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&autoReconnect=true&failOverReadOnly=false
-      username: root
-      password: root
-      initialSize: 5
-      minIdle: 5
-      maxActive: 20
-      maxWait: 60000
-      poolPreparedStatements: true
-      maxPoolPreparedStatementPerConnectionSize: 20
-      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    url: jdbc:mysql://localhost:3306/springboot?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    filters: stat
+    maxActive: 2
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  jackson:
+    serialization:
+      indent-output: true
 
 server:
   tomcat:
@@ -25,5 +38,6 @@ server:
 
 logging:
   level:
-      com.ryan.springboot.dao:  DEBUG
+      com.ryan.springboot:  DEBUG
+  file: log/springboot.log
 
